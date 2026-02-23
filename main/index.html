@@ -4,117 +4,357 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio of Ujjwal Reddy Annedla – Software Engineer, AI Enthusiast, Data Science Projects">
-  <title>Ujjwal Reddy Annedla | Cloud & Data</title>
-  
-  <!-- Google Fonts: Space Mono -->
+  <title>Ujjwal Reddy Annedla | sysadmin@portfolio:~</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- External Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* CSS Variables for IDE Theme */
+    :root {
+      --bg-color: #0d1117;       /* Deep dark background */
+      --text-main: #c9d1d9;      /* Light gray text */
+      --prompt-user: #7ee787;    /* Terminal green */
+      --prompt-dir: #79c0ff;     /* Terminal blue */
+      --accent-keyword: #ff7b72; /* Keyword pink/red */
+      --accent-string: #a5d6ff;  /* String light blue */
+      --link-color: #58a6ff;
+      --border-color: #30363d;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      line-height: 1.6;
+      padding: 2rem;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Terminal Prompt Styling */
+    .prompt {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt .user { color: var(--prompt-user); }
+    .prompt .dir { color: var(--prompt-dir); }
+    .prompt .symbol { color: var(--text-main); }
+    .prompt .command { color: var(--text-main); }
+
+    /* Blinking Cursor */
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background-color: var(--text-main);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border-color);
+    }
+    section:last-child { border-bottom: none; }
+
+    /* Header / Contact Links */
+    h1 {
+      font-size: 2rem;
+      color: var(--accent-string);
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .social-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .social-links a:hover {
+      color: var(--prompt-user);
+    }
+
+    /* Lists and Grids */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      list-style-type: none;
+    }
+    .skills-grid li::before {
+      content: "> ";
+      color: var(--prompt-user);
+    }
+
+    /* Experience & Projects */
+    .item-card {
+      margin-bottom: 2rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border-color);
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    .item-title {
+      font-size: 1.1rem;
+      color: var(--prompt-dir);
+      font-weight: 700;
+    }
+    .item-company {
+      color: var(--accent-keyword);
+    }
+    .item-date {
+      font-size: 0.9rem;
+      color: #8b949e;
+    }
+    .item-card ul {
+      list-style-type: none;
+      margin-top: 0.8rem;
+    }
+    .item-card ul li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .item-card ul li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      color: var(--border-color);
+    }
+
+    .tech-stack {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+    .tech-stack span {
+      display: inline-block;
+      border: 1px solid var(--border-color);
+      padding: 0.1rem 0.4rem;
+      margin-right: 0.4rem;
+      border-radius: 3px;
+    }
+
+    /* Selection Highlight */
+    ::selection {
+      background: var(--prompt-user);
+      color: var(--bg-color);
+    }
+  </style>
 </head>
 <body>
 
-  <main class="content-wrapper">
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-text">
-        <h1 class="glitch" data-text="UJJWAL ANNEDLA">UJJWAL ANNEDLA</h1>
-        <p class="hero-subtitle">Cloud Engineer & Data Scientist building scalable, serverless applications.</p>
-      </div>
-      <div class="hero-image-container">
-        <div class="hero-image-glitch">
-          <img src="me.jpg" alt="Ujjwal Reddy Annedla">
-          <div class="glitch-img" style="background-image: url(me.jpg);"></div>
-          <div class="glitch-img" style="background-image: url(me.jpg);"></div>
-          <div class="glitch-img" style="background-image: url(me.jpg);"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT ME -->
-    <section class="about-section scroll-reveal">
-        <p>Proactive Computer Science graduate with hands-on project experience in cloud computing and data science. Eager to apply my skills to solve real-world infrastructure challenges.</p>
-    </section>
-
-    <!-- SKILLS MARQUEE -->
-    <div class="marquee scroll-reveal">
-        <div class="marquee-content">
-            <span>PYTHON</span><span class="star">✦</span>
-            <span>AWS</span><span class="star">✦</span>
-            <span>DOCKER</span><span class="star">✦</span>
-            <span>DATA SCIENCE</span><span class="star">✦</span>
-            <span>SQL</span><span class="star">✦</span>
-            <span>DEVOPS</span><span class="star">✦</span>
-            <span>PYTHON</span><span class="star">✦</span>
-            <span>AWS</span><span class="star">✦</span>
-            <span>DOCKER</span><span class="star">✦</span>
-            <span>DATA SCIENCE</span><span class="star">✦</span>
-            <span>SQL</span><span class="star">✦</span>
-            <span>DEVOPS</span><span class="star">✦</span>
-        </div>
-    </div>
-
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="experience-section">
-        <h2 class="section-title scroll-reveal">EXPERIENCE</h2>
-        <div class="experience-grid">
-            <div class="experience-card scroll-reveal">
-                <h3>LLM Quality Expert</h3>
-                <p>Outlier AI // 2024 – Present</p>
-            </div>
-            <div class="experience-card scroll-reveal">
-                <h3>Software Engineer Intern</h3>
-                <p>Mamo Technolabs LLP // 2024 – 2025</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="projects-section">
-      <h2 class="section-title scroll-reveal">SELECTED WORK</h2>
-      <div class="projects-grid">
-        <a href="#" class="project-card scroll-reveal">
-            <span>01</span>
-            <h3>Serverless Image Pipeline</h3>
-            <p>AWS Lambda, S3, DynamoDB</p>
-        </a>
-        <a href="#" class="project-card scroll-reveal">
-            <span>02</span>
-            <h3>Cloud-Deployed Recommender</h3>
-            <p>Scikit-learn, Docker, AWS</p>
-        </a>
-        <a href="https://github.com/negativeclamper" target="_blank" class="project-card scroll-reveal">
-            <span>03</span>
-            <h3>Open Source Contributions</h3>
-            <p>Github</p>
-        </a>
-      </div>
-    </section>
+  <main class="container">
     
-    <!-- CONTACT / FOOTER -->
-    <footer id="contact" class="contact-section">
-        <div class="contact-content scroll-reveal">
-            <h2 class="glitch" data-text="LET'S CONNECT">LET'S CONNECT</h2>
-            <a href="mailto:ujjwal.r.annedla@gmail.com" class="contact-email">ujjwal.r.annedla@gmail.com</a>
-            <div class="social-links">
-                <a href="https://github.com/negativeclamper" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/ujjwalreddy3459" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.kaggle.com/ujjwalar" target="_blank" aria-label="Kaggle"><i class="fab fa-kaggle"></i></a>
-            </div>
+    <section id="header" style="border-bottom: none;">
+      <div class="prompt" id="typewriter-prompt">
+        <span class="user">guest@ujjwal</span><span class="symbol">:</span><span class="dir">~</span><span class="symbol">$</span>
+        <span class="command" id="typewriter-text"></span><span class="cursor"></span>
+      </div>
+      
+      <div id="main-content" style="display: none; opacity: 0; transition: opacity 0.5s ease-in;">
+        <h1>Ujjwal Reddy Annedla</h1>
+        [cite_start]<p class="subtitle">Cloud Engineer & Data Scientist building scalable, serverless applications[cite: 1, 2].</p>
+        
+        <div class="social-links">
+          <a href="mailto:ujjwal.r.annedla@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://github.com/negativeclamper" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com/in/ujjwalreddy3459" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://www.kaggle.com/ujjwalar" target="_blank" aria-label="Kaggle"><i class="fab fa-kaggle"></i> Kaggle</a>
         </div>
-    </footer>
+      </div>
+    </section>
 
+    <div id="rest-of-content" style="display: none; opacity: 0; transition: opacity 0.5s ease-in; transition-delay: 0.2s;">
+      
+      <section id="about">
+        <div class="prompt">
+          <span class="user">guest@ujjwal</span><span class="symbol">:</span><span class="dir">~/about</span><span class="symbol">$</span>
+          <span class="command">cat summary.txt</span>
+        </div>
+        [cite_start]<p>Proactive Computer Science graduate (B.Sc., Distinction) with hands-on project experience in cloud computing and data science[cite: 26, 27, 30]. [cite_start]Eager to apply strong foundations in Machine Learning, Statistical Modeling, and ETL pipelines to solve real-world infrastructure challenges[cite: 8, 30, 43].</p>
+      </section>
+
+      <section id="skills">
+        <div class="prompt">
+          <span class="user">guest@ujjwal</span><span class="symbol">:</span><span class="dir">~/skills</span><span class="symbol">$</span>
+          <span class="command">ls -a</span>
+        </div>
+        <ul class="skills-grid">
+          <li>Python / SQL</li>
+          <li>AWS / GCP Vertex AI</li>
+          <li>Docker / Git</li>
+          <li>Data Science / ML</li>
+          <li>Power BI / Tableau</li>
+          <li>ETL / Shell Scripting</li>
+        </ul>
+      </section>
+
+      <section id="experience">
+        <div class="prompt">
+          <span class="user">guest@ujjwal</span><span class="symbol">:</span><span class="dir">~/experience</span><span class="symbol">$</span>
+          <span class="command">./show_history.sh</span>
+        </div>
+        
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-title">Python Developer</span>
+            <span class="item-date">Nov 2025 - Present</span>
+          </div>
+          <div class="item-company">SP Software (P) Limited | Hyderabad, TS</div>
+          <ul>
+            [cite_start]<li>Engineered automated ETL pipelines using Python and SQL to process 2.5M+ records daily, reducing manual reporting latency by 80%[cite: 8].</li>
+            [cite_start]<li>Collaborated with Data Scientists to integrate ML-driven predictive analytics into applications, reducing manual data analysis time by 40%[cite: 9].</li>
+            [cite_start]<li>Developed Power BI dashboards tracking model metrics and actionable business KPIs[cite: 10].</li>
+          </ul>
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-title">LLM Analyst (Freelance)</span>
+            <span class="item-date">Oct 2024 - Oct 2025</span>
+          </div>
+          <div class="item-company">Outlier AI | Remote</div>
+          <ul>
+            [cite_start]<li>Evaluated 1,200+ LLM-generated datasets for accuracy in coding and mathematics for model optimization[cite: 17].</li>
+            [cite_start]<li>Performed statistical analysis on response patterns to identify systematic biases, providing 40-60 detailed weekly audits[cite: 18].</li>
+          </ul>
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-title">Project Intern</span>
+            <span class="item-date">Dec 2024 - Mar 2025</span>
+          </div>
+          <div class="item-company">Mamo Technolabs | Vadodara, GJ</div>
+          <ul>
+            [cite_start]<li>Supported backend for a web app, managing relational databases with SQL to handle customer order data[cite: 23].</li>
+            [cite_start]<li>Implemented data validation scripts to sanitize user input, reducing database entry errors by 30%[cite: 24].</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="prompt">
+          <span class="user">guest@ujjwal</span><span class="symbol">:</span><span class="dir">~/projects</span><span class="symbol">$</span>
+          <span class="command">ls -l</span>
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-title">Multimodal-Math-Mentor</span>
+          </div>
+          [cite_start]<p>Verifiable math tutoring AI built with Computer Vision and LangChain, featuring a Streamlit dashboard to visualize logical step-by-step solving processes in under 2 seconds[cite: 34, 35, 36].</p>
+          <div class="tech-stack">
+            <span>Python</span><span>LangChain</span><span>AIStudio</span><span>Streamlit</span>
+          </div>
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-title">jetMAP (Development)</span>
+          </div>
+          [cite_start]<p>Multi-object tracking model for live feeds that generates predicted paths in maps based on BOXMOT and YOLOv8 for live vehicle tracking[cite: 38, 39].</p>
+          <div class="tech-stack">
+            <span>Computer Vision</span><span>YOLOv8</span><span>BOXMOT</span>
+          </div>
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-title">Serverless Image Pipeline</span>
+          </div>
+          <p>Cloud architecture designed to process and store image data automatically upon upload.</p>
+          <div class="tech-stack">
+            <span>AWS Lambda</span><span>S3</span><span>DynamoDB</span>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="footer" style="text-align: center; border-bottom: none; margin-bottom: 1rem;">
+         <span style="color: #8b949e; font-size: 0.9rem;">
+            > sys.exit(0) <br>
+            // Handcrafted by Ujjwal Reddy Annedla
+         </span>
+      </section>
+
+    </div>
   </main>
-  
-  <script src="script.js"></script>
 
+  <script>
+    // Simple typewriter effect for the initial terminal load
+    document.addEventListener("DOMContentLoaded", () => {
+      const commandText = "./execute_portfolio.sh";
+      const typingSpeed = 50; 
+      let i = 0;
+      
+      function typeWriter() {
+        if (i < commandText.length) {
+          document.getElementById("typewriter-text").innerHTML += commandText.charAt(i);
+          i++;
+          setTimeout(typeWriter, typingSpeed);
+        } else {
+          // After typing finishes, reveal the content
+          setTimeout(() => {
+            document.getElementById("main-content").style.display = "block";
+            document.getElementById("rest-of-content").style.display = "block";
+            
+            // Trigger reflow to apply CSS transition
+            void document.getElementById("main-content").offsetWidth; 
+            
+            document.getElementById("main-content").style.opacity = "1";
+            document.getElementById("rest-of-content").style.opacity = "1";
+          }, 300);
+        }
+      }
+
+      // Start the effect
+      setTimeout(typeWriter, 400);
+    });
+  </script>
 </body>
 </html>
-
